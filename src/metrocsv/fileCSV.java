@@ -58,6 +58,7 @@ public class fileCSV {
                     Partition par = new Partition(i, Double.parseDouble(data[9]), arrayExample );
                     par.generateData();
                     arrayData.add(item);
+                    System.out.println("Generar arreglo");
                     //arrayPartition.add(par);
                     //System.out.println(par.toString());
                     
