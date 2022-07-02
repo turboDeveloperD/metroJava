@@ -26,8 +26,6 @@ public class distributionPoisson {
         double numero = (double) (Math.random() * n ) +1;
         PoissonDistribution p = new PoissonDistribution(numero);
         
-        System.out.println("Poisson");
-        
             for(int i =0; i < this.tam; i++){
                 double value = p.sample();
                 this.array[i]=value;

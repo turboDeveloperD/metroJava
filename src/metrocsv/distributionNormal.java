@@ -43,7 +43,7 @@ public class distributionNormal {
                 c += this.array[i];
             }
         
-        System.out.println("total = "+c);
+        //System.out.println("total = "+c);
         return this.array;
     }
     

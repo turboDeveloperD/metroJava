@@ -30,10 +30,10 @@ public class fileCSV {
     
     public void readFile(){
         String line;
-        double[] 
-                 arrayExample = {5.0,6.1,7.2,8.3,9.4,10.5,11.6,12.7,13.8,14.9,
+        double arrayExample[] = {};
+                 /*arrayExample = {5.0,6.1,7.2,8.3,9.4,10.5,11.6,12.7,13.8,14.9,
                          15.11, 16.12, 17.13, 18.14, 19.15, 20.16, 21.17,
-                         22.18, 23.19};
+                         22.18, 23.19};*/
         //System.out.println("array="+ Arrays.toString(arrayExample));
         
         try{
@@ -55,19 +55,22 @@ public class fileCSV {
                                                Integer.parseInt(data[7]), // afluencia prepago
                                                Integer.parseInt(data[8]), // afluencia gratitud
                                                Integer.parseInt(data[9])); // afluencia total
+                    arrayExample = optionRandom();
                     Partition par = new Partition(i, Double.parseDouble(data[9]), arrayExample );
                     par.generateData();
                     arrayData.add(item);
-                    System.out.println("Generar arreglo");
+                    
+                    
+                    //System.out.println("Generar arreglo");
                     //arrayPartition.add(par);
                     //System.out.println(par.toString());
                     
                     //System.out.println(par.toString());
                     //System.out.println("Emp[First Name=" + employee[1] + ", Last Name=" + employee[2] + ", Contact=" + employee[3] + ", City= " + employee[4] + "]");
-                    /*System.out.println("i="+ i +" data [fecha=" + data[0] + ", dia=" + data[1] + ",mes =" + data[2] 
+                    System.out.println("i="+ i +" data [fecha=" + data[0] + ", dia=" + data[1] + ",mes =" + data[2] 
                                         + ", anio= " + data[3] + ", linea =" + data[4] +", estacion =" + data[5] 
                                         + ", afluencia_boleto =" + data[6] + ", afluencia_prepago =" + data[7] + ", afluencia_gratuidad =" 
-                                        + data[8] + ", afluencia_total =" + data[9] + "]");*/
+                                        + data[8] + ", afluencia_total =" + data[9] + "]");
                     //System.out.println(item.toString());
                 }
                 i++;
@@ -94,23 +97,22 @@ public class fileCSV {
         return u.uniformDistribution();
     }
     
-    public void optionRandom(){
+    public double[] optionRandom(){
         Random r = new Random();
         int option = r.nextInt(3) + 1;
-        
-        switch(option){
-            case 1:
-                System.out.println("Caso 1");
-                
-            break;
-            
-            case 2:
-                System.out.println("Caso 1");
-            break;
-            
-            case 3:
-                System.out.println("Caso 1");
-            break;
+        double a[];
+        if(option == 1){
+            a = generateDistributionNormal();
+            return a;
+        }else{
+            if(option == 2)
+            {
+                a = generateDistributionPoisson();
+                return a;
+            }else{
+                a = generateDistributionUniform();
+                return a;
+            }
         }
     }
 }
