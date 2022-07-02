@@ -48,40 +48,4 @@ public class MetroCSV {
         }*/
     }
     
-    public static double[] generateDistributionNormal(){
-        distributionNormal d = new distributionNormal(19);
-        return d.findCutPointGauss();
-    }
-    
-    public static double[] generateDistributionPoisson(){
-        distributionPoisson p = new distributionPoisson(19);
-        return p.poissonDis();
-    }
-    
-    public static double[] generateDistributionUniform(){
-        distributionUniformReal u = new distributionUniformReal(19);
-        return u.uniformDistribution();
-    }
-    
-    public static double[] optionRandom(){
-        Random r = new Random();
-        int option = r.nextInt(3) + 1;
-        double a[];
-        if(option == 1){
-            System.out.println("Normal");
-            a = generateDistributionNormal();
-            return a;
-        }else{
-            if(option == 2)
-            {
-                System.out.println("Poisson");
-                a = generateDistributionPoisson();
-                return a;
-            }else{
-                System.out.println("Uniform");
-                a = generateDistributionUniform();
-                return a;
-            }
-        }
-    }
 }
