@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
 /**
  *
  * @author VILAN
@@ -42,7 +41,9 @@ public class fileCSV {
             while( (line = br.readLine() ) != null )
             {
                 if(i != 0 ){
+                    
                     String[] data = line.split(this.delimit);
+                    double afluenciaTotal = Double.parseDouble(data[9]);
                     DataCSV item = new DataCSV(
                                                i,  // Id del registro
                                                data[0], // fecha
@@ -55,22 +56,23 @@ public class fileCSV {
                                                Integer.parseInt(data[7]), // afluencia prepago
                                                Integer.parseInt(data[8]), // afluencia gratitud
                                                Integer.parseInt(data[9])); // afluencia total
-                    arrayExample = optionRandom();
+                    arrayExample = optionRandom(afluenciaTotal);
                     Partition par = new Partition(i, Double.parseDouble(data[9]), arrayExample );
                     par.generateData();
                     arrayData.add(item);
                     
                     
                     //System.out.println("Generar arreglo");
-                    //arrayPartition.add(par);
-                    //System.out.println(par.toString());
+                    
+                    arrayPartition.add(par);
+                    System.out.println(par.toString());
                     
                     //System.out.println(par.toString());
                     //System.out.println("Emp[First Name=" + employee[1] + ", Last Name=" + employee[2] + ", Contact=" + employee[3] + ", City= " + employee[4] + "]");
-                    System.out.println("i="+ i +" data [fecha=" + data[0] + ", dia=" + data[1] + ",mes =" + data[2] 
+                    /*System.out.println("i="+ i +" data [fecha=" + data[0] + ", dia=" + data[1] + ",mes =" + data[2] 
                                         + ", anio= " + data[3] + ", linea =" + data[4] +", estacion =" + data[5] 
                                         + ", afluencia_boleto =" + data[6] + ", afluencia_prepago =" + data[7] + ", afluencia_gratuidad =" 
-                                        + data[8] + ", afluencia_total =" + data[9] + "]");
+                                        + data[8] + ", afluencia_total =" + data[9] + "]");*/
                     //System.out.println(item.toString());
                 }
                 i++;
@@ -78,7 +80,7 @@ public class fileCSV {
         }catch(IOException e){
             e.printStackTrace();
         }
-        
+        System.out.println("Tamanio de arrayPartition: " + arrayPartition.size());
         System.out.println("Tamanio de arrayData: " + arrayData.size());
     }
     
@@ -97,22 +99,51 @@ public class fileCSV {
         return u.uniformDistribution();
     }
     
-    public double[] optionRandom(){
+    public double[] generateDistributionBinomial(){
+        int n = 10;
+        double p = (double)1.0 / 3;
+        double[] a= new double[19]; 
+        GFG gfg = new GFG();
+            for(int i = 0; i < 19; i++)
+            {
+                a[i] = gfg.binomialProbability(n,i,p);
+            }
+        return a;
+    }
+    
+    public double[] optionRandom(double valor){
         Random r = new Random();
         int option = r.nextInt(3) + 1;
         double a[];
         if(option == 1){
             a = generateDistributionNormal();
+            a = multiplicationArray(valor, a);
             return a;
         }else{
             if(option == 2)
             {
-                a = generateDistributionPoisson();
+                // Funciona pero no es muy buena
+                //a = generateDistributionPoisson();
+                a = generateDistributionBinomial();
+                a = multiplicationArray(valor, a);
                 return a;
             }else{
                 a = generateDistributionUniform();
+                a = multiplicationArray(valor, a);
                 return a;
             }
         }
+    }
+    
+    public double[] multiplicationArray( double num, double a[] ){
+        
+        int tam = a.length;
+        
+            for(int i=0; i<tam; i++)
+            {
+                a[i] *= num;
+            }
+            
+        return a;
     }
 }
