@@ -5,6 +5,13 @@
  */
 package metrocsv;
 
+
+import Partitions.DataCSV;
+import Partitions.Partition;
+import Distributions.GFG;
+import Distributions.distributionPoisson;
+import Distributions.distributionUniformReal;
+import Distributions.distributionNormal;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -57,15 +64,13 @@ public class fileCSV {
                                                Integer.parseInt(data[8]), // afluencia gratitud
                                                Integer.parseInt(data[9])); // afluencia total
                     arrayExample = optionRandom(afluenciaTotal);
-                    Partition par = new Partition(i, Double.parseDouble(data[9]), arrayExample );
+                    Partition par = new Partition(i, data[5], Integer.parseInt(data[9]), arrayExample );
                     par.generateData();
                     arrayData.add(item);
-                    
-                    
                     //System.out.println("Generar arreglo");
                     
                     arrayPartition.add(par);
-                    System.out.println(par.toString());
+                    //System.out.println(par.toString());
                     
                     //System.out.println(par.toString());
                     //System.out.println("Emp[First Name=" + employee[1] + ", Last Name=" + employee[2] + ", Contact=" + employee[3] + ", City= " + employee[4] + "]");
@@ -80,12 +85,13 @@ public class fileCSV {
         }catch(IOException e){
             e.printStackTrace();
         }
-        System.out.println("Tamanio de arrayPartition: " + arrayPartition.size());
-        System.out.println("Tamanio de arrayData: " + arrayData.size());
+        //System.out.println("Tamanio de arrayPartition: " + arrayPartition.size());
+        //System.out.println("Tamanio de arrayData: " + arrayData.size());
     }
     
     public double[] generateDistributionNormal(){
-        distributionNormal d = new distributionNormal(19);
+        distributionNormal d;
+        d = new distributionNormal(19);
         return d.findCutPointGauss();
     }
     

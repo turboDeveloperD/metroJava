@@ -10,24 +10,38 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 public class JFreeXY extends ApplicationFrame {
+    
+    // Atributtes
     private double array[];
     private int tam;
 
+    /**
+     * Descripcion: Constructor recibe una cadena con el nombre de la estacion, un arreglo de
+     * con los 
+     * @param title
+     * @param a
+     * @param t
+     */
     public JFreeXY(String title, double[] a, int t) {
         super(title);
-        
+        // opcional.
+        this.array = a;
+        this.tam = t;
         final XYSeries s = new XYSeries("Data");
         
-        for(int i=0; i < t; i++){
+        /*for(int i=0; i < t; i++){
             s.add(i,a[i]);
-        }
+        }*/
         
+        for(int i=0; i < this.tam; i++){
+            s.add(i+5,this.array[i]);
+        }
         final XYSeriesCollection data = new XYSeriesCollection(s);
-        final JFreeChart chart = ChartFactory.createXYLineChart("XY Data", "X", "Y", data,
+        final JFreeChart chart = ChartFactory.createXYLineChart(title, "Horas", "# usuarios", data,
                 PlotOrientation.VERTICAL, true, true, false);
 
         final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new java.awt.Dimension(1000, 1200));
         setContentPane(chartPanel);
     }
     

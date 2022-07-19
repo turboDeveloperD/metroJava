@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package metrocsv;
+package Distributions;
 
 import org.apache.commons.math3.distribution.PoissonDistribution;
 
@@ -16,11 +11,20 @@ public class distributionPoisson {
     private int tam;
     private double array[]; 
     
-    distributionPoisson(int _tam){
+    /**
+     * Constructor
+     * @param _tam
+     */
+    public distributionPoisson(int _tam){
         this.tam = _tam;
         this.array = new double[tam];
     }
     
+    /**
+     * Descripcion:  Genera y retorna un arreglo de elementos tipo double a partir de
+     * un objeto PoissonDistribution
+     * @return this.array
+     */
     public double[] poissonDis(){
         int n = 0;
         double numero = (double) (Math.random() * n ) +1;

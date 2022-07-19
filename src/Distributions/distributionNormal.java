@@ -1,4 +1,4 @@
-package metrocsv;
+package Distributions;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.PoissonDistribution;
@@ -13,11 +13,19 @@ public class distributionNormal {
     private int tam;
     private double array[];
 
-    distributionNormal(int _tam) {
+    /**
+     * @param _tam
+     */
+    public distributionNormal(int _tam) {
         this.tam = _tam;
         this.array = new double[_tam];
     }
     
+    /**
+     * Descripcion: Genera y retorna un arreglo de elementos tipo double a partir de
+     * un objeto NormalDistribution
+     * @return this.array
+     */
     public double[] findCutPointGauss(){
         NormalDistribution nd = new NormalDistribution();
         
@@ -47,15 +55,12 @@ public class distributionNormal {
         return this.array;
     }
     
+    /**
+     * Descripcion: Imprime los elementos del arreglo
+     */
     public void imprimirArray(){
         for(int i=0; i < this.tam; i++){
             System.out.println(i+"="+this.array[i]);
         }
     }
-    
-    /*public double[] poison(){
-        PoissonDistribution p = new PoissonDistribution(24.0);
-            
-            
-    }*/
 }
