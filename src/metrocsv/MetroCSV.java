@@ -5,12 +5,12 @@
  */
 package metrocsv;
 
-import Partitions.Partition;
-import java.util.Arrays;
-import java.util.Random;
-import org.jfree.ui.RefineryUtilities;
 
+import Partitions.Partition;
+import graficas.JFreeArrays;
+import org.jfree.ui.RefineryUtilities;
 import graficas.JFreeXY;
+import java.util.List;
 import java.util.Scanner;
 /**
  *
@@ -80,6 +80,7 @@ public class MetroCSV {
         do{
             System.out.println("Menu");
             System.out.println("1 Generar grafica");
+            System.out.println("2 Varias graficas");
             System.out.print("0 Salir:");
             option=read.nextInt();
             
@@ -98,6 +99,32 @@ public class MetroCSV {
                     chart.pack();
                     RefineryUtilities.centerFrameOnScreen(chart);
                     chart.setVisible(true);
+                break;
+                
+                case 2:
+                    System.out.print("\tIngrese el numero de elemento para graficar [0 - 82680]:");
+                    int item2 = itemRead.nextInt();
+                    
+                    do{
+                        if( item2 < 0 ){
+                            System.out.print("\tError ingrese numeros en el intervalo [0 - 82680]:");
+                            item2 = itemRead.nextInt();
+                        }
+                    }while( item2 < 0 );
+                    
+                    
+                    Partition itemPartititon2 = archivo.arrayPartition.get(item2);
+                    System.out.println(itemPartititon2.toString());
+                    String name2 = itemPartititon2.getName();
+                    List<Partition> itemPartitionGraph = archivo.getArrayPartitionGraph(itemPartititon2.getId());
+                    JFreeArrays charts = new JFreeArrays(name2, 
+                                                                itemPartitionGraph.get(0).getPercentajes(), "Normal", 
+                                                                itemPartitionGraph.get(1).getPercentajes(), "Binomial", 
+                                                                itemPartitionGraph.get(2).getPercentajes(), "Uniform", 
+                                                        19);
+                    charts.pack();
+                    RefineryUtilities.centerFrameOnScreen(charts);
+                    charts.setVisible(true);
                 break;
                 
                 default:

@@ -38,7 +38,8 @@ public class distributionNormal {
         }*/
         
         //function Normal
-        double k = 3;
+        //double k = 3; //original
+        double k = 7;
         int n =this.tam;
         double interval = k/(2*n+1);
         

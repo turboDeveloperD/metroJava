@@ -6,15 +6,16 @@
 package metrocsv;
 
 
+import Distributions.distributionBinomial;
 import Partitions.DataCSV;
 import Partitions.Partition;
-import Distributions.GFG;
 import Distributions.distributionPoisson;
 import Distributions.distributionUniformReal;
 import Distributions.distributionNormal;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -27,6 +28,8 @@ public class fileCSV {
     private String delimit;
     List<DataCSV> arrayData = new LinkedList<DataCSV>(); // arreglo que guarda todos los datos 
     List<Partition> arrayPartition = new LinkedList<Partition>(); // arreglo  
+    //List<Partition> itemPartitionGraph = new LinkedList<Partition>(); // arreglo para mostrar diferentes graficas por un elemento
+
     //private DataCSV;
     
     public fileCSV(String file, String delimit) {
@@ -64,7 +67,10 @@ public class fileCSV {
                                                Integer.parseInt(data[8]), // afluencia gratitud
                                                Integer.parseInt(data[9])); // afluencia total
                     arrayExample = optionRandom(afluenciaTotal);
-                    Partition par = new Partition(i, data[5], Integer.parseInt(data[9]), arrayExample );
+                    Partition par = new Partition(i, // id
+                                                  data[5], // nombre de la station 
+                                                  Integer.parseInt(data[9]),  // afluencia total
+                                                  arrayExample );  // arreglo 
                     par.generateData();
                     arrayData.add(item);
                     //System.out.println("Generar arreglo");
@@ -106,15 +112,8 @@ public class fileCSV {
     }
     
     public double[] generateDistributionBinomial(){
-        int n = 10;
-        double p = (double)1.0 / 3;
-        double[] a= new double[19]; 
-        GFG gfg = new GFG();
-            for(int i = 0; i < 19; i++)
-            {
-                a[i] = gfg.binomialProbability(n,i,p);
-            }
-        return a;
+        distributionBinomial b = new distributionBinomial(19);
+        return b.findCutPointDistribution();
     }
     
     public double[] optionRandom(double valor){
@@ -152,4 +151,51 @@ public class fileCSV {
             
         return a;
     }
+
+    // Retorna una lista de particiones de un elemento dentro de la lista 
+    public List<Partition> getArrayPartitionGraph(int id) {
+        
+        // obtener una toda la info del elemento
+        DataCSV d = findItem(id);
+        
+        String stationName = d.getStation();
+        int total = d.getA_total();
+        
+        List<Partition> itemPartitionGraph = new LinkedList<Partition>();
+        //generar diferentes particiones
+        double[] arrayNormal   = multiplicationArray(d.getA_total(), generateDistributionNormal());
+        double[] arrayBinomial = multiplicationArray(d.getA_total(), generateDistributionBinomial()); 
+        double[] arrayUniform  = multiplicationArray(d.getA_total(), generateDistributionUniform());
+        
+        System.out.println("Arreglo Normal:" + Arrays.toString(arrayNormal));
+        System.out.println("Arreglo Binomial:" + Arrays.toString(arrayBinomial));
+        System.out.println("Arreglo Uniforme:" + Arrays.toString(arrayUniform));
+        
+        System.out.println("stationName: " + stationName);
+        System.out.println("total: " + total);
+        Partition pNormal = new Partition(d.getId(), d.getStation(), d.getA_boleto(), arrayNormal);
+        Partition pBinomial = new Partition(d.getId(), d.getStation(), d.getA_boleto(), arrayBinomial);
+        Partition pUniform = new Partition(d.getId(), d.getStation(), d.getA_boleto(), arrayUniform);
+        
+        itemPartitionGraph.add(pNormal);
+        itemPartitionGraph.add(pBinomial);
+        itemPartitionGraph.add(pUniform);
+        
+        return itemPartitionGraph;
+    }
+    
+    /*
+        Revisar despues si el recorrido por ID esta bien
+    */
+    public DataCSV findItem(int id){
+        if(id > 0){
+            DataCSV d = this.arrayData.get(id-1);
+            return d;
+        }else{
+            DataCSV d = this.arrayData.get(id);
+            return d;
+        }
+    }
+    
+    
 }

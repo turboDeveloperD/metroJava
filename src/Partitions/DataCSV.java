@@ -48,4 +48,50 @@ public class DataCSV {
                 + ", a_boleto=" + a_boleto + ", a_prepago=" + a_prepago 
                 + ", a_gratuidad=" + a_gratuidad + ", a_total=" + a_total + '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public String getStation() {
+        return station;
+    }
+
+    public int getA_boleto() {
+        return a_boleto;
+    }
+
+    public int getA_prepago() {
+        return a_prepago;
+    }
+
+    public int getA_gratuidad() {
+        return a_gratuidad;
+    }
+
+    public int getA_total() {
+        return a_total;
+    }
+    
+    
 }

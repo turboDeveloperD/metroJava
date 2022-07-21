@@ -23,14 +23,30 @@ public class distributionUniformReal {
      * @return this.array
      */
     public double[] uniformDistribution(){
-        UniformRealDistribution u = new UniformRealDistribution(0,1);
+        /*UniformRealDistribution u = new UniformRealDistribution(0,1);
         
         for(int i=0; i < this.tam; i++)
         {
             this.array[i] = u.sample();
+        }*/
+        
+        UniformRealDistribution u = new UniformRealDistribution(0,1.44);
+
+        double val = u.sample();
+        for(int i=0; i < this.tam; i++)
+        {
+            this.array[i] = val;
         }
 
         return this.array;
+    }
+
+    public int getTam() {
+        return tam;
+    }
+
+    public double[] getArray() {
+        return array;
     }
     
             
