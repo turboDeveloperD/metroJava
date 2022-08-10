@@ -6,10 +6,16 @@
 package metrocsv;
 
 
+import Distributions.distributionBinomial;
+import Distributions.distributionNormal;
+import Partitions.DataCSV;
 import Partitions.Partition;
+import Partitions.Percentage;
+//import Partitions.porcetajes;
+import distributionuniform2.distributionUniformRealNew;
 import graficas.JFreeArrays;
 import org.jfree.ui.RefineryUtilities;
-import graficas.JFreeXY;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 /**
@@ -19,7 +25,7 @@ import java.util.Scanner;
 public class MetroCSV {
 
     public static final String delimiter = ",";
-    public static final String csv = "C:\\Users\\VILAN\\Documents\\Tesis\\Metro\\Nuevo con Adalberto y Gerardo\\Afluencia del metro\\afluenciastc_desglosado_02_2022.csv";
+    public static final String csv = "C:\\Users\\VILAN\\Documents\\NetBeansProjects\\MetroCSV_1\\afluenciastc_desglosado_02_2022.csv";
     
     public static void main(String[] args) {
         
@@ -90,18 +96,21 @@ public class MetroCSV {
                 break;
                 
                 case 1:
-                    System.out.print("\tIngrese el numero de elemento para graficar [1 - 82680]:");
-                    int item = itemRead.nextInt();
-                    Partition itemPartititon = archivo.arrayPartition.get(item);
+                    System.out.print("\tPruebas case1");
+                    //System.out.print("\tIngrese el numero de elemento para graficar [1 - 82680]:");
+                    //int item = itemRead.nextInt();
+                    
+                    /*Partition itemPartititon = archivo.arrayPartition.get(item);
                     System.out.println(itemPartititon.toString());
                     String name = itemPartititon.getName();
                     JFreeXY chart = new JFreeXY(name, itemPartititon.getArrayhour(), 19);
                     chart.pack();
                     RefineryUtilities.centerFrameOnScreen(chart);
-                    chart.setVisible(true);
+                    chart.setVisible(true);*/
                 break;
                 
                 case 2:
+                    System.out.print("\tPruebas case2");
                     System.out.print("\tIngrese el numero de elemento para graficar [0 - 82680]:");
                     int item2 = itemRead.nextInt();
                     
@@ -112,8 +121,67 @@ public class MetroCSV {
                         }
                     }while( item2 < 0 );
                     
-                    
                     Partition itemPartititon2 = archivo.arrayPartition.get(item2);
+                    DataCSV itemSelect = archivo.arrayData.get(item2);
+                    
+                    /* Datos*/
+                    int idItem = itemSelect.getId();
+                    String stationItem = itemSelect.getStation();
+                    int totalItem = itemSelect.getA_total();
+                    
+                    System.out.println("idItem:"+idItem+"\n"+"stationItem:" + stationItem+ "\n" + "totalItem:" + totalItem);
+                    
+                    /* Generar arreglos */
+                    distributionNormal n = new distributionNormal(19);
+                    distributionUniformRealNew uU = new distributionUniformRealNew(19, totalItem);
+                    distributionBinomial b = new distributionBinomial(19);
+                    
+                    double arrayn[] = n.findCutPointGauss();
+                    double arrayuu[] = uU.uniformDistributionMe();
+                    double arrayb[] = b.findCutPointDistribution();
+                    
+                    /*Generar Particiones*/
+                    Partition pn = new Partition(idItem, stationItem, totalItem, arrayn);
+                    Partition pUU = new Partition(idItem, stationItem, totalItem, arrayuu);
+                    Partition pb = new Partition(idItem, stationItem, totalItem, arrayb);
+                    
+                    pn.generateData();
+                    //pUU.generateData();
+                    pb.generateData();
+                    
+                    /*double aan[] = pn.getArrayhour();
+                    double aab[] = pb.getArrayhour();
+                    
+                    double uniforme=0;
+                    double binomial=0;
+                    
+                    for(int cont = 0; cont < 19; cont++)
+                    {
+                        uniforme += aan[cont];
+                        binomial += aab[cont];
+                    }
+                    
+                    System.out.println("total normal:" + uniforme);
+                    System.out.println("total binomial:" + binomial + "\n");
+                    
+                    System.out.println("normal: " + Arrays.toString(pn.getArrayhour()) );
+                    System.out.println("uniformeU: " + Arrays.toString(pUU.getPercentajes()) );
+                    System.out.println("binomial: " + Arrays.toString(pb.getArrayhour()) );*/
+                    
+                    
+                    
+                    JFreeArrays charts = new JFreeArrays(stationItem,
+                                                                     pn.getArrayhour(), "Normal",
+                                                                     pUU.getPercentajes(), "Uniform",
+                                                                     pb.getArrayhour(), "Binomial",
+                                                        19);
+                    charts.pack();
+                    RefineryUtilities.centerFrameOnScreen(charts);
+                    charts.setVisible(true);
+                    
+                    /*Partition pd = new Partition(option, csv, option, arrayb);
+                    
+                    
                     System.out.println(itemPartititon2.toString());
                     String name2 = itemPartititon2.getName();
                     List<Partition> itemPartitionGraph = archivo.getArrayPartitionGraph(itemPartititon2.getId());
@@ -124,8 +192,9 @@ public class MetroCSV {
                                                         19);
                     charts.pack();
                     RefineryUtilities.centerFrameOnScreen(charts);
-                    charts.setVisible(true);
+                    charts.setVisible(true);*/
                 break;
+
                 
                 default:
                     System.out.println("Seleccione una opcion porfavor\n\n");

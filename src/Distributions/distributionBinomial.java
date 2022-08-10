@@ -23,6 +23,7 @@ public class distributionBinomial {
     }
     
     /**
+     * Se genera de manera de porcentaje
      * Descripcion: Genera y retorna un arreglo de elementos tipo double a partir de
      * un objeto NormalDistribution
      * @return this.array
@@ -31,13 +32,16 @@ public class distributionBinomial {
         
         int n = 17;
         double p = 0.75;
-        
+        double t= 0;
             for(int i=0; i < this.tam; i++)
             {
                 double probability = binomialProbability(n, i, p);
                 this.array[i] = probability;
+                t += probability;
             }
         
+            //System.out.println("total Binomial = "+t);
+            
         return this.array;
     }
     

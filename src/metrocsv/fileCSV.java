@@ -66,16 +66,22 @@ public class fileCSV {
                                                Integer.parseInt(data[7]), // afluencia prepago
                                                Integer.parseInt(data[8]), // afluencia gratitud
                                                Integer.parseInt(data[9])); // afluencia total
+                    arrayData.add(item);
+                    
+                    
+                    // esta mal pero es prueba
                     arrayExample = optionRandom(afluenciaTotal);
                     Partition par = new Partition(i, // id
                                                   data[5], // nombre de la station 
                                                   Integer.parseInt(data[9]),  // afluencia total
                                                   arrayExample );  // arreglo 
                     par.generateData();
-                    arrayData.add(item);
+                    arrayPartition.add(par);
+                    
+                    
                     //System.out.println("Generar arreglo");
                     
-                    arrayPartition.add(par);
+                    
                     //System.out.println(par.toString());
                     
                     //System.out.println(par.toString());

@@ -1,8 +1,9 @@
-package Distributions;
+package distributionuniform2;
 
-import org.apache.commons.math3.distribution.UniformRealDistribution;
 
-public class distributionUniformReal {
+
+
+public class distributionUniformRealNew {
     // atributos
     private int tam;
     private double array[];
@@ -13,9 +14,10 @@ public class distributionUniformReal {
      * un objeto UniformRealDistribution
      * @param _tam 
      */
-    public distributionUniformReal(int _tam) {
-        this.tam = _tam;
-        this.array = new double[tam];
+    public distributionUniformRealNew(int _tam, int _total) {
+        this.tam   = _tam;
+        this.array = new double[this.tam];
+        this.total = _total;
     }
     
     /**
@@ -23,13 +25,13 @@ public class distributionUniformReal {
      * un objeto UniformRealDistribution
      * @return this.array
      */
-    public double[] uniformDistribution(){
+    /*public double[] uniformDistribution(){
         /*UniformRealDistribution u = new UniformRealDistribution(0,1);
         
         for(int i=0; i < this.tam; i++)
         {
             this.array[i] = u.sample();
-        }*/
+        }
         
         UniformRealDistribution u = new UniformRealDistribution(0,1.44);
 
@@ -40,8 +42,21 @@ public class distributionUniformReal {
         }
 
         return this.array;
-    }
+    }*/
     
+    public double[] uniformDistributionMe(){
+    
+        int lim = this.tam;
+        double u = this.total/lim;
+        double t = 0.0;
+        for(int i =0; i< lim; i++){
+            this.array[i] = u;
+            t += u;
+        }
+        
+        //System.out.println("total Uniform = "+ t);
+        return this.array;
+    }
 
     public int getTam() {
         return tam;
@@ -50,6 +65,9 @@ public class distributionUniformReal {
     public double[] getArray() {
         return array;
     }
-    
+
+    public int getTotal() {
+        return total;
+    }
             
 }

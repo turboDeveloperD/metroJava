@@ -38,11 +38,12 @@ public class distributionNormal {
         }*/
         
         //function Normal
-        //double k = 3; //original
-        double k = 7;
+        double k = 3; //original
+        //double k = 7;
         int n =this.tam;
         double interval = k/(2*n+1);
         
+        //double totalN = 0;
         //double c = nd.probability( interval);
         double c = 0.0;
             for(int i =0; i <n; i++){
@@ -51,8 +52,7 @@ public class distributionNormal {
                 this.array[i] = nd.probability(x0,x1);
                 c += this.array[i];
             }
-        
-        //System.out.println("total = "+c);
+        //System.out.println("total Normal = "+c);
         return this.array;
     }
     

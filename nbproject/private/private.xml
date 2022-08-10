@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/graficas/JFreeArrays.java</file>
+            <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/Distributions/distributionBinomial.java</file>
             <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/Distributions/distributionNormal.java</file>
             <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/metrocsv/fileCSV.java</file>
-            <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/Distributions/distributionUniformReal.java</file>
             <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/metrocsv/MetroCSV.java</file>
-            <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/Partitions/Partition.java</file>
-            <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/Partitions/DataCSV.java</file>
+            <file>file:/C:/Users/VILAN/Documents/NetBeansProjects/MetroCSV_1/src/Distributions/distributionUniformRealNew.java</file>
         </group>
     </open-files>
 </project-private>
